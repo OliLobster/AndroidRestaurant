@@ -14,12 +14,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get ListView object from xml.
+ /*       // Get ListView object from xml.
         ListView eventListView = (ListView) findViewById(R.id.event_list);
 
         // Assign adapter to ListView.
         RestaurantAdapter adapter = new RestaurantAdapter(this);
 
-        eventListView.setAdapter(adapter);
+        eventListView.setAdapter(adapter);*/
     }
 }
