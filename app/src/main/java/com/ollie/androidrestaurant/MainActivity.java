@@ -3,6 +3,7 @@ package com.ollie.androidrestaurant;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,7 +50,14 @@ public class MainActivity extends AppCompatActivity implements RestaurantListFra
     // Add this method to main activity
     @Override
     public void onItemSelected(int position){
-        mGridFragment.onItemSelected(position);
+        //start another activity if current device is phone
+        if (!isTablet()) {
+            Intent intent = new Intent(this, EventGridActivity.class);
+            intent.putExtra("position", position);
+            startActivity(intent);
+        } else {
+            mGridFragment.onItemSelected(position);
+        }
     }
 
 

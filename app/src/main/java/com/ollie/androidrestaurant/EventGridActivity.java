@@ -1,0 +1,28 @@
+package com.ollie.androidrestaurant;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+public class EventGridActivity extends AppCompatActivity {
+    int pos = 0;
+    RestaurantGridFragment fragment;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_event_grid);
+        Intent intent = getIntent();
+        pos = intent.getIntExtra("position", 0);
+        fragment = new RestaurantGridFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.grid_container, fragment).commit();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        fragment.onItemSelected(pos);
+    }
+
+}
