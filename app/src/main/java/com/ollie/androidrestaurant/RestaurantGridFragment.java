@@ -1,5 +1,6 @@
 package com.ollie.androidrestaurant;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,7 @@ public class RestaurantGridFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private GridView mGridView;
 
     public RestaurantGridFragment() {
         // Required empty public constructor
@@ -61,8 +63,20 @@ public class RestaurantGridFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_restaurant_grid, container, false);
-        GridView gridView = (GridView) view.findViewById(R.id.restaurant_grid_view);
-        gridView.setAdapter(new RestaurantAdapter(getActivity()));
+        mGridView = (GridView) view.findViewById(R.id.restaurant_grid_view);
+        mGridView.setAdapter(new RestaurantAdapter(getActivity()));
         return view;
     }
+
+    // Change background color if the item is selected
+    public void onItemSelected(int position){
+        for (int i = 0; i < mGridView.getChildCount(); i++){
+            if (position == i) {
+                mGridView.getChildAt(i).setBackgroundColor(Color.BLUE);
+            } else {
+                mGridView.getChildAt(i).setBackgroundColor(Color.parseColor("#FAFAFA"));
+            }
+        }
+    }
+
 }

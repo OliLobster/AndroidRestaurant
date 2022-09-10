@@ -9,7 +9,9 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RestaurantListFragment
+        .OnItemSelectListener {
+
     private RestaurantListFragment mListFragment;
     private RestaurantGridFragment mGridFragment;
 
@@ -39,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    // Add this method to main activity
+    @Override
+    public void onItemSelected(int position){
+        mGridFragment.onItemSelected(position);
+    }
+
 
     private boolean isTablet() {
         return (getApplicationContext().getResources().getConfiguration().screenLayout &

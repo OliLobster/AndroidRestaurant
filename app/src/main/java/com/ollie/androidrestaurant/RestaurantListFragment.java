@@ -1,5 +1,6 @@
 package com.ollie.androidrestaurant;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -69,8 +71,31 @@ public class RestaurantListFragment extends Fragment {
 
         // Assign adapter to ListView.
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                mCallback.onItemSelected(i);
+            }
+        });
         return view;
     }
+    OnItemSelectListener mCallback;
+
+    // Container Activity must implement this interface
+    public interface OnItemSelectListener {
+        public void onItemSelected(int position);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (OnItemSelectListener) context;
+        } catch (ClassCastException e) {
+            //do something
+        }
+    }
+
 
     /**
      *   Get resturants names
