@@ -10,10 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements RestaurantListFragment
-        .OnItemSelectListener {
+        .OnItemSelectListener, RestaurantGridFragment.OnItemSelectListener {
 
     private RestaurantListFragment mListFragment;
     private RestaurantGridFragment mGridFragment;
+
+    @Override
+    public void onListItemSelected(int position) {
+        mListFragment.onItemSelected(position);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

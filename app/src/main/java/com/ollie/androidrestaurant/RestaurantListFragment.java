@@ -1,6 +1,7 @@
 package com.ollie.androidrestaurant;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,7 +28,7 @@ public class RestaurantListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    ListView mListView;
     public RestaurantListFragment() {
         // Required empty public constructor
     }
@@ -63,15 +64,15 @@ public class RestaurantListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurant_list, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.restuarant_list);
+        ListView mListView = (ListView) view.findViewById(R.id.restuarant_list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
                 getRestaurantsName());
 
         // Assign adapter to ListView.
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 mCallback.onItemSelected(i);
@@ -85,6 +86,17 @@ public class RestaurantListFragment extends Fragment {
     public interface OnItemSelectListener {
         public void onItemSelected(int position);
     }
+
+    public void onItemSelected(int position){
+        for (int i = 0; i < mListView.getChildCount(); i++){
+            if (position == i) {
+                mListView.getChildAt(i).setBackgroundColor(Color.BLUE);
+            } else {
+                mListView.getChildAt(i).setBackgroundColor(Color.parseColor("#FAFAFA"));
+            }
+        }
+    }
+
 
     @Override
     public void onAttach(Context context) {
