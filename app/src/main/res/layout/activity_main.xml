@@ -7,6 +7,18 @@
     android:orientation="horizontal"
     tools:context="com.ollie.androidrestaurant.MainActivity">
 
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:id="@+id/restaurant_list_container">
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/restaurant_grid_container">
+    </RelativeLayout>
+
 </LinearLayout>
 
 

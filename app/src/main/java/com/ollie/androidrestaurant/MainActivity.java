@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
+    private RestaurantListFragment mListFragment;
+    private RestaurantGridFragment mGridFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +25,19 @@ public class MainActivity extends AppCompatActivity {
         RestaurantAdapter adapter = new RestaurantAdapter(this);
 
         eventListView.setAdapter(adapter);*/
-        // Show different fragments based on screen size.
-        if (findViewById(R.id.fragment_container) != null) {
-            Fragment fragment = isTablet() ? new RestaurantGridFragment()
-                    : new RestaurantListFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
-                    fragment).commit();
+        //add list view
+        mListFragment = new RestaurantListFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.restaurant_list_container,
+                mListFragment).commit();
+
+
+        //add Gridview
+        if (isTablet()) {
+            mGridFragment = new RestaurantGridFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.restaurant_grid_container,
+                    mGridFragment).commit();
         }
+
     }
 
     private boolean isTablet() {

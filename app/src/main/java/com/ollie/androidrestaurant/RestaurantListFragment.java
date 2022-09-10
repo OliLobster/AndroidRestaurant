@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
@@ -61,7 +62,25 @@ public class RestaurantListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurant_list, container, false);
         ListView listView = (ListView) view.findViewById(R.id.restuarant_list);
-        listView.setAdapter(new RestaurantAdapter(getActivity()));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                getActivity(),
+                android.R.layout.simple_list_item_1,
+                getRestaurantsName());
+
+        // Assign adapter to ListView.
+        listView.setAdapter(adapter);
         return view;
+    }
+
+    /**
+     *   Get resturants names
+     */
+    private String[] getRestaurantsName() {
+        String[] names = {
+                "Restaurant1", "Restaurant2", "Restaurant3",
+                "Restaurant4", "Restaurant5", "Restaurant6",
+                "Restaurant7", "Restaurant8", "Restaurant9",
+                "Restaurant10", "Restaurant11", "Restaurant12"};
+        return names;
     }
 }
