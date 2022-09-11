@@ -1,6 +1,7 @@
 package com.ollie.androidrestaurant;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,11 +74,21 @@ public class RestaurantListFragment extends Fragment {
                 getRestaurantsName());
 
         // Assign adapter to ListView.
-        mListView.setAdapter(adapter);
+        mListView.setAdapter(new RestaurantAdapter(getActivity()));
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mCallback.onItemSelected(i);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Restaurant r = (Restaurant)mListView.getItemAtPosition(position);
+
+                //Prepare all the data we need to start map activity.
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(RestaurantMapActivity.EXTRA_LATLNG,
+                        new LatLng(r.getLat(), r.getLng()));
+
+                //Create explicit intent to start map activity class
+                Intent intent = new Intent(view.getContext(), RestaurantMapActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
         return view;

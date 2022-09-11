@@ -40,12 +40,6 @@ public class MainActivity extends AppCompatActivity implements RestaurantListFra
 
 
         //add Gridview
-        if (isTablet()) {
-            mGridFragment = new RestaurantGridFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.restaurant_grid_container,
-                    mGridFragment).commit();
-        }
-
     }
     // Add this method to main activity
     @Override

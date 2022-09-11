@@ -9,13 +9,17 @@ public class DataService {
      * to our backend later.
      */
     public static List<Restaurant> getRestaurantData() {
-        List<Restaurant> eventData = new ArrayList<Restaurant>();
+        List<Restaurant> restaurantData = new ArrayList<Restaurant>();
         for (int i = 0; i < 10; ++i) {
-            eventData.add(
-                    new Restaurant("Restaurant", "1184 W valley Blvd, CA 90101",
-                            "Asian"));
+            restaurantData.add(
+                    new Restaurant(
+                            "Restaurant",
+                            "1184 W valley Blvd, CA 90101",
+                            "New American",
+                            i * 7 + 7,
+                            i * 5 - 5));
         }
-        return eventData;
+        return restaurantData;
     }
 }
 
