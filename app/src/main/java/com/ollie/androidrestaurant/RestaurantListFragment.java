@@ -32,6 +32,8 @@ public class RestaurantListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     ListView mListView;
+    OnItemSelectListener mCallback;
+
     public RestaurantListFragment() {
         // Required empty public constructor
     }
@@ -67,33 +69,16 @@ public class RestaurantListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurant_list, container, false);
-        ListView mListView = (ListView) view.findViewById(R.id.restuarant_list);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        ListView mListView = (ListView) view.findViewById(R.id.restaurant_list);
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
-                getRestaurantsName());
+                getRestaurantsName());*/
 
         // Assign adapter to ListView.
         mListView.setAdapter(new RestaurantAdapter(getActivity()));
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Restaurant r = (Restaurant)mListView.getItemAtPosition(position);
-
-                //Prepare all the data we need to start map activity.
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(RestaurantMapActivity.EXTRA_LATLNG,
-                        new LatLng(r.getLat(), r.getLng()));
-
-                //Create explicit intent to start map activity class
-                Intent intent = new Intent(view.getContext(), RestaurantMapActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
         return view;
     }
-    OnItemSelectListener mCallback;
 
     // Container Activity must implement this interface
     public interface OnItemSelectListener {

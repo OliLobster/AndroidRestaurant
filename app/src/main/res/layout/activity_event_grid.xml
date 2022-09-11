@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventGridActivity">
+    tools:context="com.ollie.androidrestaurant.EventGridActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/grid_container" />
+        android:id="@+id/grid_container"
+        ></RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

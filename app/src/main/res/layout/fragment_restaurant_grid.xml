@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RestaurantGridFragment">
+    tools:context="com.ollie.androidrestaurant.RestaurantGridFragment">
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/restaurant_grid_view"
@@ -15,3 +15,4 @@
         android:gravity="center" />
 
 </FrameLayout>
+

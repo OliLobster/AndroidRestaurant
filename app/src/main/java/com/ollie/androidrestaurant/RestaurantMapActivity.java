@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -36,12 +37,25 @@ public class RestaurantMapActivity extends FragmentActivity  implements OnMapRea
         Bundle bundle = this.getIntent().getExtras();
         if (bundle != null) {
             toMark = bundle.getParcelable(EXTRA_LATLNG);
-            IntentFilter filter = new IntentFilter();
-            filter.addAction("GOOGLEMAP_ZOOM");
-            mBroadcastReceiver = new ZoomMap();
-            this.registerReceiver(mBroadcastReceiver, filter);
+        }
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("GOOGLEMAP_ZOOM");
+        mBroadcastReceiver = new ZoomMap();
+        this.registerReceiver(mBroadcastReceiver, filter);
+        }
+
+    class ZoomMap extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle extras = intent.getExtras();
+            if (extras != null) {
+                number = Integer.parseInt(extras.getString("ZOOM"));
+                mapFragment.getMapAsync(RestaurantMapActivity.this);
+                Log.d("MyBroadcastReceiver","onReceive: start...");
+            }
         }
     }
+
 
     @Override
     public void onMapReady(GoogleMap map) {
@@ -52,20 +66,10 @@ public class RestaurantMapActivity extends FragmentActivity  implements OnMapRea
         }
     }
 
-    class ZoomMap extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Bundle extras = intent.getExtras();
-            if (extras != null) {
-                number = Integer.parseInt(extras.getString("ZOOM"));
-                mapFragment.getMapAsync(RestaurantMapActivity.this);
-            }
-        }
-    }
-
     @Override
     protected void onStop() {
         super.onStop();
         this.unregisterReceiver(mBroadcastReceiver);
     }
 }
+
