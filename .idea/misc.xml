@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_event_grid.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_backend_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_restaurant_grid.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_restaurant_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/restaurant_item.xml" value="0.1" />
