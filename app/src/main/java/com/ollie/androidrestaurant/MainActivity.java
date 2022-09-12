@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements RestaurantListFra
 
     private RestaurantListFragment mListFragment;
     private RestaurantGridFragment mGridFragment;
+    private BackendListFragment mBackendFragment;
 
     @Override
     public void onListItemSelected(int position) {
@@ -34,9 +35,9 @@ public class MainActivity extends AppCompatActivity implements RestaurantListFra
 
         eventListView.setAdapter(adapter);*/
         //add list view
-        mListFragment = new RestaurantListFragment();
+        mBackendFragment = new BackendListFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.restaurant_list_container,
-                mListFragment).commit();
+                mBackendFragment).commit();
 
 
         //add Gridview

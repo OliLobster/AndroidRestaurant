@@ -1,12 +1,22 @@
 package com.ollie.androidrestaurant;
 
+import android.app.DownloadManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.Response;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +33,7 @@ public class BackendListFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private static final String TAG = BackendListFragment.class.getSimpleName();
 
     public BackendListFragment() {
         // Required empty public constructor
@@ -59,6 +70,31 @@ public class BackendListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_backend_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_backend_list, container, false);
+        getNearbyRestaurantThroughBackend();
+        return view;
     }
+
+    public void getNearbyRestaurantThroughBackend() {
+        final String tag = "just testing";
+        Log.i(tag, "getNearbyExecuted");
+        String urlSearch = "http://localhost:8080/Roro/search?lat=37.386051&lon=-122.083855";
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.GET,
+                urlSearch, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, response);
+                Log.i(tag, "getNearbyonResponseExecuted");
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i(tag, "onErrorResponse");
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
+
 }
